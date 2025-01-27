@@ -43,26 +43,45 @@
 </body>
 </html>
  -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review Analysis Application</title>
+    <title>Review Sentiment Analysis</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        /* Background image and styling */
         body {
-            margin-top: 50px;
+            background: url('reviews-stars.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
         }
         .container {
-            max-width: 600px;
+            background: rgba(0, 0, 0, 0.7); /* Add semi-transparent background */
             padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 50px auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn {
+            width: 100%;
+            margin-top: 10px;
         }
         .result {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
+            background: #f8f9fa;
+            color: #212529;
+            padding: 15px;
             border-radius: 5px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -74,7 +93,7 @@
         <form action="/predict" method="POST">
             <div class="form-group">
                 <label for="review">Enter your review:</label>
-                <textarea class="form-control" id="review" name="review" rows="4">{{ review if review else '' }}</textarea>
+                <textarea class="form-control" id="review" name="review" rows="4" placeholder="Type your review here..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Analyze Sentiment</button>
             <button type="reset" class="btn btn-secondary">Clear</button>
