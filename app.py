@@ -54,33 +54,44 @@ def home():
     return render_template('index.html')
 
 # Prediction route
+# @app.route('/predict', methods=['POST'])
+# def predict():
+#     if request.method == 'POST':
+#         # Get user input from the form
+#         review = request.form['review']
+#         print(f"Raw review: {review}", flush=True)
+#         # Clean and preprocess input
+#         # Convert the input into a DataFrame
+#         new_data = pd.DataFrame([review], columns=['review'])
+#         new_data['review'] = new_data['review'].apply(clean)
+#         print(f"Cleaned review: {new_data['review'][0]}", flush=True)
+        
+        
+        
+#         # Vectorize the input
+#         vectorized_review = vectorizer.transform(new_data['review'])
+        
+#         # Make a prediction
+#         prediction = model.predict(vectorized_review)
+#         print(f"Prediction: {prediction}", flush=True)
+        
+#         # Convert prediction to a human-readable label
+#         sentiment = "Positive" if prediction[0] == 'Positive' else "Negative"
+
+        
+#         # Return the result to the user
+#         return render_template('index.html', prediction_text=f"Sentiment: {sentiment}", review=review)
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
-        # Get user input from the form
-        review = request.form['review']
-        print(f"Raw review: {review}", flush=True)
-        # Clean and preprocess input
-        # Convert the input into a DataFrame
-        new_data = pd.DataFrame([review], columns=['review'])
-        new_data['review'] = new_data['review'].apply(clean)
-        print(f"Cleaned review: {new_data['review'][0]}", flush=True)
-        
-        
-        
-        # Vectorize the input
-        vectorized_review = vectorizer.transform(new_data['review'])
-        
-        # Make a prediction
+        review = request.form.get('Review')
+        cleaned_review = clean(review)
+        vectorized_review = vectorizer.transform([cleaned_review])
         prediction = model.predict(vectorized_review)
-        print(f"Prediction: {prediction}", flush=True)
-        
-        # Convert prediction to a human-readable label
-        sentiment = "Positive" if prediction[0] == 'Positive' else "Negative"
 
-        
-        # Return the result to the user
-        return render_template('index.html', prediction_text=f"Sentiment: {sentiment}", review=review)
+        result = "Positive" if prediction[0] == 'Positive' else "Negative"
+        print(f"Prediction: {result}")  # Debugging: check the result in the console
+        return render_template('index.html', prediction_text=result)
 
 
 if __name__ == '__main__':
