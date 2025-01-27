@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -40,5 +40,57 @@
         </div>
         {% endif %}
     </div>
+</body>
+</html>
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Analysis Application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Review Sentiment Analysis</h2>
+        
+        <!-- Form to submit review -->
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="review">Enter your review:</label>
+                <textarea class="form-control" id="review" name="review" rows="4">{{ review if review else '' }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze Sentiment</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+        </form>
+
+        <!-- Display prediction result -->
+        {% if prediction_text %}
+        <div class="result">
+            <h4>Prediction:</h4>
+            <p>{{ prediction_text }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
